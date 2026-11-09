@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-
-
 @RestController 
 @RequestMapping ("/api/students")
 @AllArgsConstructor 
@@ -37,7 +35,8 @@ public class StudentController {
 
     @GetMapping("/")
     public ResponseEntity<List<Student>> getAllStudents() {
-        return new ResponseEntity<List<Student>>(service.findAllStudents(), HttpStatus.ACCEPTED);
+        List<Student> students = service.findAllStudents();
+        return new ResponseEntity<List<Student>>(students, HttpStatus.ACCEPTED);
     }
     
     @GetMapping("/{id}")
@@ -66,7 +65,7 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/course/{course}")
+    @GetMapping("/courses/{course}")
     public ResponseEntity<List<Student>> getStudentsByCourse(@PathVariable String course) {
         return new ResponseEntity<>(service.findStudentsByCourse(course), HttpStatus.ACCEPTED);
     }
